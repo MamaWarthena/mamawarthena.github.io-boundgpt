@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BoundGPT</title>
+  <style>
+    body {
+      background: black;
+      color: red;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+    }
+    .chatbox {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background: #111;
+      border: 1px solid #900;
+      overflow-y: auto;
+      height: 400px;
+    }
+    input, button {
+      background: #222;
+      color: white;
+      border: 1px solid #900;
+      padding: 8px;
+      margin-top: 10px;
+      width: calc(100% - 20px);
+    }
+  </style>
+</head>
+<body>
+  <div class="chatbox" id="chatbox"></div>
+  <div style="max-width:600px;margin:auto;">
+    <input id="prompt" placeholder="Speak to BoundGPT..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <script>
+    async function sendMessage() {
+      const prompt = document.getElementById("prompt").value;
+      document.getElementById("chatbox").innerHTML += `<p>You: ${prompt}</p>`;
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById("chatbox").innerHTML += `<p>BoundGPT: ${data.reply}</p>`;
+    }
+  </script>
+</body>
+</html>
