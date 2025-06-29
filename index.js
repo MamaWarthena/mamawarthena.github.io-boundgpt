@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.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,
 });
 const openai = new OpenAIApi(configuration);
 
