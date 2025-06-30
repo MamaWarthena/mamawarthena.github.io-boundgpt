@@ -27,3 +27,4 @@ app.post('/api/chat', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`BoundGPT lives at http://localhost:${PORT}`));
+const openaiApiKey = process.env.OPENAI_API_KEY;
